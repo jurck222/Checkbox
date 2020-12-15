@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/Bisque"
+
+    tools:context=".DetailsActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/checkbox_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/Linen"
+            app:titleTextColor="@color/Gray"
+            >
+
+            <EditText
+                android:id="@+id/edittitleid"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:text="Opravilo?"
+                android:textSize="21sp"
+                android:hint="Opravilo?"
+                android:layout_height="wrap_content"
+
+                >
+
+
+            </EditText>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:id="@+id/texthello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Izberi datum!"
+        android:textColor="@color/black"
+        android:textSize="30sp">
+    </TextView>
+    <LinearLayout
+        android:background="@color/Gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp"
+
+        >
+
+        <CalendarView
+            android:id="@+id/koledar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        </CalendarView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="100"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:text="SAVE"
+            android:theme="@style/button"
+            app:backgroundTint="@color/Gray">
+
+        </Button>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="40">
+
+        </View>
+        <Button
+            android:id="@+id/cancle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:text="CANCLE"
+            android:theme="@style/button"
+            app:backgroundTint="@color/Gray">
+
+        </Button>
+    </LinearLayout>
+
+
+</LinearLayout>

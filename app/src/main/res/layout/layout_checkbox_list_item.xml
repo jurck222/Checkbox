@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100"
+    android:background="@color/LightYellow"
+    android:gravity="center_vertical"
+    >
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/Yellow"
+        >
+    </View>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="65"
+        android:id="@+id/checktitle"
+        android:textSize="23sp"
+        android:lines="1"
+        android:text="naslov"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        >
+    </TextView>
+    <CheckBox
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkmark"
+        android:layout_weight="9"
+        >
+    </CheckBox>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4">
+    </View>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:id="@+id/caskonca"
+        android:textSize="17sp"
+        android:textColor="@color/Gray"
+        android:text="dec 2018"
+        android:padding="10dp"
+        />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/Yellow"
+        >
+    </View>
+
+</LinearLayout>
