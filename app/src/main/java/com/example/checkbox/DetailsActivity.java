@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,11 +19,16 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.checkbox.Persistance.Repository;
 import com.example.checkbox.checkbox.checkbox;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DetailsActivity extends AppCompatActivity implements
         View.OnClickListener
@@ -30,11 +36,13 @@ public class DetailsActivity extends AppCompatActivity implements
     private static final String TAG = "DetailsActivity";
     //ui
     private EditText mEditTitle;
-    private TextView dateText;
+    private TextView izberiCas,izpisiCas;
     CalendarView calendarView;
     private Button mAdd;
     private Button mCancle;
     //vars
+    int ura,min;
+    String mCas;
     private String datum;
     private boolean mIsNewCheck;
     private checkbox mInitialCheckbox;
@@ -44,7 +52,8 @@ public class DetailsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         mEditTitle = findViewById(R.id.edittitleid);
-        dateText = findViewById(R.id.texthello);
+        izberiCas= findViewById(R.id.cas);
+        izpisiCas=findViewById(R.id.izbranicas);
         calendarView = (CalendarView) findViewById(R.id.koledar);
         mAdd = findViewById(R.id.add);
         mCancle = findViewById(R.id.cancle);
@@ -56,7 +65,7 @@ public class DetailsActivity extends AppCompatActivity implements
                 String mesec = fromNumberToMonth(month + 1);
                 String date = (dayOfMonth + "." + mesec + " " + year);
                 datum = date;
-                dateText.setText(date);
+
             }
         });
         if (getIncomingIntent()) {
@@ -68,6 +77,7 @@ public class DetailsActivity extends AppCompatActivity implements
     public void setListeners() {
         mAdd.setOnClickListener(this);
         mCancle.setOnClickListener(this);
+        izberiCas.setOnClickListener(this);
     }
     public boolean getIncomingIntent() {
         if (getIntent().hasExtra("selected_checkbox")) {
@@ -95,16 +105,18 @@ public class DetailsActivity extends AppCompatActivity implements
     private void ButtonSave() {
         mInitialCheckbox.setNaslov(mEditTitle.getText().toString());
         mInitialCheckbox.setDatumKonca(datum);
+        mInitialCheckbox.setCas(mCas);
         saveChanges();
     }
     private void setCheckProperties() {
         mEditTitle.setText(mInitialCheckbox.getNaslov());
-        dateText.setText(mInitialCheckbox.getDatumKonca());
+
     }
     private void setNewCheckProperties() {
 
         mInitialCheckbox = new checkbox();
         mInitialCheckbox.setDatumKonca(datum);
+        mInitialCheckbox.setCas(mCas);
 
     }
     private String fromNumberToMonth(int month) {
@@ -162,6 +174,28 @@ public class DetailsActivity extends AppCompatActivity implements
                 ButtonSave();
                 finish();
                 break;
+            }
+            case R.id.cas:{
+                Calendar calendar=Calendar.getInstance();
+                ura=calendar.get(Calendar.HOUR_OF_DAY);
+                min=calendar.get(Calendar.MINUTE);
+                TimePickerDialog timePickerDialog=new TimePickerDialog(DetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        ura=hourOfDay;
+                        min=minute;
+                        if(min<10){
+                            mCas=ura+":0"+min;
+                        }
+                        else{
+                            mCas= ura+":"+min;
+                        }
+
+                        izpisiCas.setText(mCas);
+                    }
+                },ura,min,false);
+                timePickerDialog.show();
+
             }
         }
     }

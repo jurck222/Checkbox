@@ -35,6 +35,7 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.koncnicas.setText(mCheckboxes.get(position).getDatumKonca());
         holder.naslov.setText(mCheckboxes.get(position).getNaslov());
+        holder.caszakj.setText((mCheckboxes.get(position).getCas()));
     }
 
     @Override
@@ -43,7 +44,7 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView naslov, koncnicas;
+        private TextView naslov, koncnicas,caszakj;
         private CheckBox check;
         OnCheckListener onCheckListener;
 
@@ -52,6 +53,7 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
             naslov=itemView.findViewById(R.id.checktitle);
             koncnicas=itemView.findViewById(R.id.caskonca);
             check=itemView.findViewById(R.id.checkmark);
+            caszakj=itemView.findViewById(R.id.caszaklj);
             itemView.setOnClickListener(this);
         }
 

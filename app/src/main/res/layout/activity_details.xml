@@ -38,16 +38,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:id="@+id/texthello"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Izberi datum!"
-        android:textColor="@color/black"
-        android:textSize="30sp">
-    </TextView>
+
     <LinearLayout
         android:background="@color/Gray"
         android:layout_width="wrap_content"
@@ -67,13 +58,35 @@
             >
         </CalendarView>
     </LinearLayout>
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="100"
+        android:text="Izberite čas:"
+        android:textSize="30dp"
+        android:id="@+id/cas"
+        android:gravity="center_horizontal"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:hint="hh.mm"
+        android:textSize="30dp"
+        android:id="@+id/izbranicas"
+        android:gravity="center_horizontal"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:weightSum="100">
+
         <Button
             android:id="@+id/add"
             android:layout_width="0dp"
@@ -84,12 +97,14 @@
             app:backgroundTint="@color/Gray">
 
         </Button>
+
         <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="40">
 
         </View>
+
         <Button
             android:id="@+id/cancle"
             android:layout_width="0dp"

@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="65"
+        android:layout_weight="35"
         android:id="@+id/checktitle"
         android:textSize="23sp"
         android:lines="1"
@@ -27,26 +27,34 @@
         android:textColor="@color/black"
         >
     </TextView>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:id="@+id/caszaklj"
+        android:textSize="23sp"
+        android:textColor="@color/Gray"
+        android:lines="1"
+        android:text="00:00">
+
+    </TextView>
+
     <CheckBox
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/checkmark"
-        android:layout_weight="9"
+        android:layout_weight="7"
         >
     </CheckBox>
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="4">
-    </View>
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="25"
+        android:layout_weight="35"
         android:id="@+id/caskonca"
         android:textSize="17sp"
         android:textColor="@color/Gray"
-        android:text="dec 2018"
+        android:text="15.dec 2018"
         android:padding="10dp"
         />
     <View

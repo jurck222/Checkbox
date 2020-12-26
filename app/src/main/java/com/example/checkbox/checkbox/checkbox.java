@@ -17,12 +17,15 @@ public class checkbox implements Parcelable {
     private String naslov;
     @ColumnInfo(name = "Datum")
     private String datumKonca;
+    @ColumnInfo(name = "Cas")
+    private String cas;
 
 
-    public checkbox(String naslov,int id,  String datumKonca) {
+    public checkbox(String naslov,int id,String cas,  String datumKonca) {
         this.naslov = naslov;
         this.id=id;
         this.datumKonca = datumKonca;
+        this.cas=cas;
     }
     @Ignore
     public checkbox() {
@@ -33,6 +36,7 @@ public class checkbox implements Parcelable {
         id = in.readInt();
         naslov = in.readString();
         datumKonca = in.readString();
+        cas=in.readString();
     }
 
     public static final Creator<checkbox> CREATOR = new Creator<checkbox>() {
@@ -46,6 +50,14 @@ public class checkbox implements Parcelable {
             return new checkbox[size];
         }
     };
+
+    public String getCas() {
+        return cas;
+    }
+
+    public void setCas(String cas) {
+        this.cas = cas;
+    }
 
     public String getNaslov() {
         return naslov;
@@ -90,5 +102,6 @@ public class checkbox implements Parcelable {
         dest.writeInt(id);
         dest.writeString(naslov);
         dest.writeString(datumKonca);
+        dest.writeString(cas);
     }
 }
