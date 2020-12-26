@@ -1,0 +1,52 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b60be94f5db71e8a3250ca886294566b",
+    "entities": [
+      {
+        "tableName": "checkboxes",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Naslov` TEXT, `Datum` TEXT, `Cas` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "naslov",
+            "columnName": "Naslov",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "datumKonca",
+            "columnName": "Datum",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cas",
+            "columnName": "Cas",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b60be94f5db71e8a3250ca886294566b')"
+    ]
+  }
+}
