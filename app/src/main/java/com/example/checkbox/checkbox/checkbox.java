@@ -19,13 +19,16 @@ public class checkbox implements Parcelable {
     private String datumKonca;
     @ColumnInfo(name = "Cas")
     private String cas;
+    @ColumnInfo(name="CState")
+    private int CheckboxState;
 
 
-    public checkbox(String naslov,int id,String cas,  String datumKonca) {
+    public checkbox(String naslov,int id,String cas,  String datumKonca,int CheckboxState) {
         this.naslov = naslov;
         this.id=id;
         this.datumKonca = datumKonca;
         this.cas=cas;
+        this.CheckboxState=CheckboxState;
     }
     @Ignore
     public checkbox() {
@@ -50,6 +53,14 @@ public class checkbox implements Parcelable {
             return new checkbox[size];
         }
     };
+
+    public int getCheckboxState() {
+        return CheckboxState;
+    }
+
+    public void setCheckboxState(int checkboxState) {
+        CheckboxState = checkboxState;
+    }
 
     public String getCas() {
         return cas;

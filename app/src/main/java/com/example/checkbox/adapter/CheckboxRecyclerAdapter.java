@@ -1,5 +1,6 @@
 package com.example.checkbox.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.checkbox.Persistance.Repository;
 import com.example.checkbox.R;
 import com.example.checkbox.checkbox.checkbox;
 
@@ -18,6 +20,9 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
     private static final String TAG = "CheckboxRecyclerAdapter";
     private ArrayList<checkbox> mCheckboxes= new ArrayList<>();
     private OnCheckListener mOnCheckListener;
+    private checkbox mCheckbox;
+    private Repository aRepository;
+    private Context context;
 
     public CheckboxRecyclerAdapter(ArrayList<checkbox> mCheckboxes,OnCheckListener mOnCheckListener) {
         this.mCheckboxes = mCheckboxes;
@@ -28,6 +33,8 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_checkbox_list_item,parent,false);
+        context= parent.getContext();
+        aRepository=new Repository(context);
         return new ViewHolder(view,mOnCheckListener);
     }
 
@@ -36,6 +43,26 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
         holder.koncnicas.setText(mCheckboxes.get(position).getDatumKonca());
         holder.naslov.setText(mCheckboxes.get(position).getNaslov());
         holder.caszakj.setText((mCheckboxes.get(position).getCas()));
+        if (mCheckboxes.get(position).getCheckboxState()==1){
+            holder.check.setChecked(true);
+        }
+        else{
+            holder.check.setChecked(false);
+        }
+        holder.check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCheckbox = mCheckboxes.get(position);
+                if (mCheckbox.getCheckboxState()==1){
+                    mCheckbox.setCheckboxState(0);
+                }
+                else{
+                    mCheckbox.setCheckboxState(1);
+                }
+                aRepository.update(mCheckbox);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
