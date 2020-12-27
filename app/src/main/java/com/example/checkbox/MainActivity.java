@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements CheckboxRecyclerA
             checkbox checkbox =new checkbox();
             checkbox.setNaslov("naslov #: "+i);
             checkbox.setDatumKonca("15/Jan/2019");
+            checkbox.setOpravljeno(0);
 
             mCheckboxes.add(checkbox);
         }
