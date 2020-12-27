@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "ce63ec54a5909e501d78237a7edd4e94",
+    "identityHash": "b60be94f5db71e8a3250ca886294566b",
     "entities": [
       {
         "tableName": "checkboxes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Naslov` TEXT, `Datum` TEXT, `Cas` TEXT, `Opravljeno` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Naslov` TEXT, `Datum` TEXT, `Cas` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -31,12 +31,6 @@
             "columnName": "Cas",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "opravljeno",
-            "columnName": "Opravljeno",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -52,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ce63ec54a5909e501d78237a7edd4e94')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b60be94f5db71e8a3250ca886294566b')"
     ]
   }
 }

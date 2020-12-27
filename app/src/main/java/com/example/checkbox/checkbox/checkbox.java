@@ -9,8 +9,6 @@ import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.PrimaryKey;
 
-import java.util.function.DoublePredicate;
-
 @Entity(tableName = "checkboxes")
 public class checkbox implements Parcelable {
     @PrimaryKey(autoGenerate = true)
@@ -21,8 +19,6 @@ public class checkbox implements Parcelable {
     private String datumKonca;
     @ColumnInfo(name = "Cas")
     private String cas;
-    @ColumnInfo(name = "Opravljeno")
-    private int opravljeno;
 
 
     public checkbox(String naslov,int id,String cas,  String datumKonca) {
@@ -41,7 +37,6 @@ public class checkbox implements Parcelable {
         naslov = in.readString();
         datumKonca = in.readString();
         cas=in.readString();
-        opravljeno=in.readInt();
     }
 
     public static final Creator<checkbox> CREATOR = new Creator<checkbox>() {
@@ -55,12 +50,6 @@ public class checkbox implements Parcelable {
             return new checkbox[size];
         }
     };
-
-    public int getOpravljeno() { return opravljeno; }
-
-    public void setOpravljeno(int opravljeno) {
-        this.opravljeno = opravljeno;
-    }
 
     public String getCas() {
         return cas;
@@ -114,6 +103,5 @@ public class checkbox implements Parcelable {
         dest.writeString(naslov);
         dest.writeString(datumKonca);
         dest.writeString(cas);
-        dest.writeInt(opravljeno);
     }
 }

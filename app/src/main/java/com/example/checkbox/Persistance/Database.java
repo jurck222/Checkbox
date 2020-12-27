@@ -18,7 +18,6 @@ public abstract class Database extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE 'checkboxes' ADD COLUMN 'Cas' TEXT  DEFAULT null");
-            database.execSQL("ALTER TABLE 'checkboxes' ADD COLUMN 'Opravljeno' INTEGER  DEFAULT 0");
         }
     };
     static Database getInstance(final Context context){
