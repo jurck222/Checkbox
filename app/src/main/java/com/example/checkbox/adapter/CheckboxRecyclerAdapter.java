@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.checkbox.Persistance.Repository;
 import com.example.checkbox.R;
 import com.example.checkbox.checkbox.checkbox;
+import com.example.checkbox.util.PrefConfig;
 
 import java.util.ArrayList;
-
 public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecyclerAdapter.ViewHolder> {
     private static final String TAG = "CheckboxRecyclerAdapter";
     private ArrayList<checkbox> mCheckboxes= new ArrayList<>();
@@ -40,6 +40,7 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.koncnicas.setText(mCheckboxes.get(position).getDatumKonca());
         holder.naslov.setText(mCheckboxes.get(position).getNaslov());
         holder.caszakj.setText((mCheckboxes.get(position).getCas()));
@@ -52,9 +53,12 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mCheckbox = mCheckboxes.get(position);
                 if (mCheckbox.getCheckboxState()==1){
                     mCheckbox.setCheckboxState(0);
+
+
                 }
                 else{
                     mCheckbox.setCheckboxState(1);
@@ -74,6 +78,7 @@ public class CheckboxRecyclerAdapter extends RecyclerView.Adapter<CheckboxRecycl
         private TextView naslov, koncnicas,caszakj;
         private CheckBox check;
         OnCheckListener onCheckListener;
+
 
         public ViewHolder(@NonNull View itemView ,OnCheckListener onCheckListener) {
             super(itemView);

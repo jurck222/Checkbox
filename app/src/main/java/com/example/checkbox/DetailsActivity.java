@@ -1,11 +1,18 @@
 package com.example.checkbox;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,11 +31,15 @@ import android.widget.Toast;
 
 import com.example.checkbox.Persistance.Repository;
 import com.example.checkbox.checkbox.checkbox;
+import com.example.checkbox.util.PrefConfig;
+import com.example.checkbox.util.ReminderBroadcast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class DetailsActivity extends AppCompatActivity implements
         View.OnClickListener
@@ -41,8 +52,17 @@ public class DetailsActivity extends AppCompatActivity implements
     private Button mAdd;
     private Button mCancle;
     //vars
+
+
     int ura,min;
+    //notification stuff
+    private MainActivity mActivity;
+    long izpisujem;
     String mCas;
+    String datumRacun;
+    Date datum123;
+    int stetjeNotifications;
+
     private String datum;
     private boolean mIsNewCheck;
     private checkbox mInitialCheckbox;
@@ -51,7 +71,9 @@ public class DetailsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        mActivity = new MainActivity();
         mEditTitle = findViewById(R.id.edittitleid);
+        stetjeNotifications = 0;
         izberiCas= findViewById(R.id.cas);
         izpisiCas=findViewById(R.id.izbranicas);
         calendarView = (CalendarView) findViewById(R.id.koledar);
@@ -65,6 +87,10 @@ public class DetailsActivity extends AppCompatActivity implements
                 String mesec = fromNumberToMonth(month + 1);
                 String date = (dayOfMonth + "." + mesec + " " + year);
                 datum = date;
+
+                izpisujem = view.getDate();
+                datumRacun = ""+year+"/"+(month+1)+"/"+dayOfMonth+" ";
+                //Toast.makeText(DetailsActivity.this, String.valueOf(izpisujem), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -162,6 +188,38 @@ public class DetailsActivity extends AppCompatActivity implements
             }
         }
     }
+
+
+
+    //notifications
+    public void triggerNotif(long opominCas) {
+        Random r = new Random();
+        int idNotif = r.nextInt(10000 - 0 + 1);
+        Intent intent2 = new Intent(DetailsActivity.this, ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(DetailsActivity.this,idNotif,intent2,0);
+
+        AlarmManager alarmManager =(AlarmManager) getSystemService(ALARM_SERVICE);
+
+        long spomniMe = opominCas;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, spomniMe-30000,pendingIntent);
+    }
+
+    public void notif(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "LemubitReminderChannel";
+            String description = "Channel for Lemubit Reminder";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -171,6 +229,26 @@ public class DetailsActivity extends AppCompatActivity implements
                 break;
             }
             case R.id.add: {
+                int stevec = PrefConfig.getVse(this);
+                stevec++;
+                PrefConfig.setVse(getApplicationContext(), stevec);
+
+                int stevec2 = PrefConfig.getTotal(this);
+                stevec2++;
+                PrefConfig.setTotal(getApplicationContext(),stevec2);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                Date datum123 = null;
+                try {
+                    datum123 = sdf.parse(datumRacun);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long milis = datum123.getTime();
+                //Toast.makeText(this, String.valueOf(datum123), Toast.LENGTH_SHORT).show();
+
+                notif();
+                triggerNotif(milis);
                 ButtonSave();
                 finish();
                 break;
@@ -180,10 +258,21 @@ public class DetailsActivity extends AppCompatActivity implements
                 ura=calendar.get(Calendar.HOUR_OF_DAY);
                 min=calendar.get(Calendar.MINUTE);
                 TimePickerDialog timePickerDialog=new TimePickerDialog(DetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        //Calendar dobimpodatke = Calendar.getInstance();
                         ura=hourOfDay;
                         min=minute;
+                        long cascas = view.getHour() * 60 * 60 * 1000;
+                        long cascas2 = view.getMinute() * 60 * 1000;
+                        long skupno = cascas + cascas2;
+                        if (minute > 9){
+                        datumRacun+=hourOfDay+":"+minute+":00";}
+                        else {datumRacun+=hourOfDay+":0"+minute+":00";}
+                        //izpisujem+=skupno;
+                        //Toast.makeText(DetailsActivity.this, datumRacun+" tole je pa ko ga system gettam " + String.valueOf(System.currentTimeMillis()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mActivity, String.valueOf(dobimpodatke.getTimeInMillis()), Toast.LENGTH_SHORT).show();
                         if(min<10){
                             mCas=ura+":0"+min;
                         }

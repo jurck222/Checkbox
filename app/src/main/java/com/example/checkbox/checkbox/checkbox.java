@@ -1,5 +1,6 @@
 package com.example.checkbox.checkbox;
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,6 +9,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Insert;
 import androidx.room.PrimaryKey;
+
+import com.example.checkbox.util.PrefConfig;
 
 @Entity(tableName = "checkboxes")
 public class checkbox implements Parcelable {
@@ -115,4 +118,5 @@ public class checkbox implements Parcelable {
         dest.writeString(datumKonca);
         dest.writeString(cas);
     }
+
 }
