@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/Bisque"
 
     tools:context=".DetailsActivity">
     <com.google.android.material.appbar.AppBarLayout
@@ -16,15 +15,13 @@
             android:id="@+id/checkbox_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/Linen"
-            app:titleTextColor="@color/Gray"
+
             >
 
             <EditText
                 android:id="@+id/edittitleid"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
                 android:text="Opravilo?"
                 android:textSize="21sp"
                 android:hint="Opravilo?"
@@ -72,7 +69,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:hint="hh.mm"
         android:textSize="30dp"
         android:id="@+id/izbranicas"

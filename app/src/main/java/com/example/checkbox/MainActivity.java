@@ -2,6 +2,7 @@ package com.example.checkbox;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -55,37 +56,19 @@ public class MainActivity extends AppCompatActivity implements CheckboxRecyclerA
         retrieveCheckboxes();
         setSupportActionBar((Toolbar)findViewById(R.id.checkbox_toolbar));
         setTitle("Checkboxes");
-
+        int stanje = PrefConfig.getNmode(this);
+        loadNightModeState(stanje);
 
     }
 
-    /*
-    public void triggerNotif(long opominCas) {
-
-        Intent intent2 = new Intent(MainActivity.this, ReminderBroadcast.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent2,0);
-
-        AlarmManager alarmManager =(AlarmManager) getSystemService(ALARM_SERVICE);
-
-        long spomniMe = opominCas;
-
-        alarmManager.set(AlarmManager.RTC_WAKEUP, spomniMe,pendingIntent);
-    }
-
-    public void notif(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "LemubitReminderChannel";
-            String description = "Channel for Lemubit Reminder";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyLemubit",name,importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+    // check if night mode is ON or OFF
+    private void loadNightModeState(int b) {
+        if (b==1){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
+        else {AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
     }
 
-     */
 
 
     //init menu options

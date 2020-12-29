@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="100"
-    android:background="@color/LightYellow"
+    android:background="@color/AliceBlue"
     android:gravity="center_vertical"
     >
     <View
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/Yellow"
+        android:background="@color/CadetBlue"
         >
     </View>
     <TextView
@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/Yellow"
+        android:background="@color/CadetBlue"
         >
     </View>
 
