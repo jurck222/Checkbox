@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements CheckboxRecyclerA
         //fakechecks();
         retrieveCheckboxes();
         setSupportActionBar((Toolbar)findViewById(R.id.checkbox_toolbar));
-        setTitle("Checkboxes");
+        setTitle("Tasks");
         int stanje = PrefConfig.getNmode(this);
         loadNightModeState(stanje);
 
